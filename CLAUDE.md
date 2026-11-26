@@ -64,7 +64,9 @@ Convenciones:
 
 - Fuente de verdad del contenido: el CV en `assets/` (ignorado por Git: contiene teléfono y email).
 - **No publicar teléfono ni email** en la web ni en el repositorio.
-- Contacto: próximamente mediante **formulario de contacto** (funcionalidad futura, por diseñar).
+- Contacto: **formulario** en la página Contacto → email por SMTP (`smtplib`) desde la cuenta del dueño, visitante en Reply-To.
+  Credenciales solo en `st.secrets` (`[contacto]`, ver `.streamlit/secrets.toml.example`). Sin secretos, el formulario se oculta.
+  Validación en servidor (`core/contacto.py`) además de la del navegador; límite de 3 envíos por sesión y 60 s entre intentos.
 
 ## Futura integración ML (no implementar todavía)
 
@@ -93,12 +95,12 @@ Datos completos en `content/`. Resumen:
 ## Decisiones pendientes
 
 Estado de los proyectos 1 y 3 · cómo ofrecer el CV en la web (el PDF no está en Git) ·
-diseño del formulario de contacto · capturas · idioma (solo ES o ES+EN) · foto ·
+capturas · idioma (solo ES o ES+EN) · foto ·
 dataset y licencia del proyecto de crédito · repo de la API (mismo o aparte) · hibernación de Community Cloud.
 
 Resueltas: repos de proyectos, LinkedIn y certificados enlazados (sacados del CV) · repositorio público https://github.com/ValentinIA/portfolio · app publicada en https://valentin-portfolio.streamlit.app/ · Streamlit 1.67.0 admite `st.navigation(position="top")`.
 
 ## Fase actual
 
-Fase 4: páginas (Inicio y Proyectos hechas; siguen Sobre mí y Contacto). Fases 0–3 completadas.
+Fase 4: páginas (Inicio, Proyectos y Contacto hechas; falta Sobre mí). Fases 0–3 completadas.
 Hoja de ruta: 0 base → 1 despliegue temprano → 2 esqueleto de navegación → 3 modelo de contenido → 4 páginas → 5 diseño → 6 revisión y cierre.

@@ -2,6 +2,7 @@
 
 import streamlit as st
 
+from components.enlaces import botones_enlaces
 from components.insignias import insignias
 from components.proyecto import tarjeta_proyecto
 from servicios.contenido import obtener_perfil, obtener_proyecto_destacado
@@ -21,8 +22,7 @@ with st.container(horizontal=True):
         "Ver proyectos", type="primary", icon=":material/folder_open:", key="inicio_ver_proyectos"
     ):
         st.switch_page("app_pages/proyectos.py")
-    for enlace in perfil.enlaces:
-        st.link_button(enlace.nombre, enlace.url, icon=":material/open_in_new:")
+    botones_enlaces(perfil.enlaces)
 
 # --- Proyecto destacado -------------------------------------------------------
 
