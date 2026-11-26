@@ -77,9 +77,11 @@ ruff check . && ruff format . # lint y formato
 
 Estado de los proyectos 1 y 2 · repos públicos enlazables · capturas · email/LinkedIn/GitHub ·
 CV en PDF · idioma (solo ES o ES+EN) · foto · dataset y licencia del proyecto de crédito ·
-repo de la API (mismo o aparte) · hibernación de Community Cloud · nombre del repo/URL.
+repo de la API (mismo o aparte) · hibernación de Community Cloud.
+
+Resueltas: repositorio público https://github.com/ValentinIA/portfolio · app publicada en https://valentin-portfolio.streamlit.app/ · Streamlit 1.67.0 admite `st.navigation(position="top")`.
 
 ## Fase actual
 
-Fase 0: base del proyecto (Git, GitHub, instalar Streamlit, "hola mundo").
+Fase 2: esqueleto de navegación (4 páginas vacías con `st.navigation` superior). Fases 0 y 1 completadas.
 Hoja de ruta: 0 base → 1 despliegue temprano → 2 esqueleto de navegación → 3 modelo de contenido → 4 páginas → 5 diseño → 6 revisión y cierre.
