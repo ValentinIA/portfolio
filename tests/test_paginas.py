@@ -8,7 +8,12 @@ import pytest
 from streamlit.testing.v1 import AppTest
 
 from core.config import DIR_RAIZ
-from servicios.contenido import obtener_perfil, obtener_proyecto_destacado, obtener_proyectos
+from servicios.contenido import (
+    obtener_perfil,
+    obtener_proyecto_destacado,
+    obtener_proyectos,
+    obtener_trayectoria,
+)
 
 PAGINAS = [
     "app_pages/inicio.py",
@@ -67,3 +72,24 @@ def test_proyectos_slug_inexistente_muestra_aviso_y_listado():
     assert not at.exception
     assert len(at.warning) == 1
     assert at.title[0].value == "Proyectos"
+
+
+def test_sobre_mi_muestra_toda_la_trayectoria():
+    at = _app().run()
+    at.switch_page("app_pages/sobre_mi.py").run()
+    trayectoria = obtener_trayectoria()
+    textos = " ".join(m.value for m in at.markdown) + " ".join(c.value for c in at.caption)
+
+    assert not at.exception
+    for e in trayectoria.experiencia:
+        assert e.puesto in textos and e.empresa in textos
+    for f in trayectoria.formacion:
+        assert f.titulo in textos and f.centro in textos
+    for i in trayectoria.idiomas:
+        assert i.idioma in textos
+
+    certificados = [
+        x for x in (*trayectoria.experiencia, *trayectoria.formacion) if x.credencial_url
+    ]
+    enlaces = [e for e in at.get("page_link") if "certificado" in e.proto.label]
+    assert len(enlaces) == len(certificados)

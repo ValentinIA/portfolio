@@ -94,6 +94,7 @@ def cargar_perfil(directorio: Path = DIR_CONTENIDO) -> Perfil:
             )
             for enlace in _tablas(datos, "enlaces", ctx)
         ),
+        aprendiendo=_texto_opcional(datos, "aprendiendo", ctx),
     )
 
 

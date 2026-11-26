@@ -102,5 +102,5 @@ Resueltas: repos de proyectos, LinkedIn y certificados enlazados (sacados del CV
 
 ## Fase actual
 
-Fase 4: páginas (Inicio, Proyectos y Contacto hechas; falta Sobre mí). Fases 0–3 completadas.
+Fase 5: diseño (tema en config.toml). Fases 0–4 completadas: las 4 páginas muestran contenido real.
 Hoja de ruta: 0 base → 1 despliegue temprano → 2 esqueleto de navegación → 3 modelo de contenido → 4 páginas → 5 diseño → 6 revisión y cierre.

@@ -47,6 +47,8 @@ class Perfil:
     orientacion: tuple[str, ...]
     competencias: tuple[GrupoCompetencias, ...]
     enlaces: tuple[Enlace, ...]
+    # Lo que se está aprendiendo ahora (se muestra como aprendizaje, no como especialidad).
+    aprendiendo: str | None = None
 
 
 @dataclass(frozen=True)

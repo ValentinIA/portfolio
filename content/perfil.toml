@@ -13,6 +13,7 @@ modelización predictiva e integración de soluciones basadas en inteligencia ar
 Me interesa construir soluciones que conecten el procesamiento de datos, los modelos de IA \
 y el desarrollo backend.
 """
+aprendiendo = "Desarrollo agéntico con Claude Code: este portfolio es mi proyecto de práctica."
 orientacion = [
     "Desarrollo Python",
     "Desarrollo backend",
