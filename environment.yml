@@ -1,0 +1,12 @@
+# Entorno local de desarrollo.
+# Crear:      conda env create -f environment.yml
+# Actualizar: conda env update -f environment.yml --prune
+# Las dependencias de Python viven en requirements.txt (fuente única).
+name: portfolio
+channels:
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+      - -r requirements.txt
