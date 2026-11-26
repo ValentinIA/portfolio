@@ -100,5 +100,5 @@ Resueltas: repos de proyectos, LinkedIn y certificados enlazados (sacados del CV
 
 ## Fase actual
 
-Fase 4: páginas (Inicio hecha; siguen Proyectos, Sobre mí, Contacto). Fases 0–3 completadas.
+Fase 4: páginas (Inicio y Proyectos hechas; siguen Sobre mí y Contacto). Fases 0–3 completadas.
 Hoja de ruta: 0 base → 1 despliegue temprano → 2 esqueleto de navegación → 3 modelo de contenido → 4 páginas → 5 diseño → 6 revisión y cierre.

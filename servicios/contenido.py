@@ -13,7 +13,12 @@ Nota: si editas un TOML con la app en marcha, limpia la caché
 
 import streamlit as st
 
-from core.cargador import cargar_perfil, cargar_proyectos, cargar_trayectoria
+from core.cargador import (
+    cargar_detalle_proyecto,
+    cargar_perfil,
+    cargar_proyectos,
+    cargar_trayectoria,
+)
 from core.modelos import Perfil, Proyecto, Trayectoria
 
 
@@ -32,5 +37,14 @@ def obtener_proyectos() -> tuple[Proyecto, ...]:
     return cargar_proyectos()
 
 
+@st.cache_data
+def obtener_detalle_proyecto(slug: str) -> str:
+    return cargar_detalle_proyecto(slug)
+
+
 def obtener_proyecto_destacado() -> Proyecto | None:
     return next((p for p in obtener_proyectos() if p.destacado), None)
+
+
+def buscar_proyecto(slug: str | None) -> Proyecto | None:
+    return next((p for p in obtener_proyectos() if p.slug == slug), None)

@@ -5,7 +5,13 @@ from pathlib import Path
 
 import pytest
 
-from core.cargador import ErrorContenido, cargar_perfil, cargar_proyectos, cargar_trayectoria
+from core.cargador import (
+    ErrorContenido,
+    cargar_detalle_proyecto,
+    cargar_perfil,
+    cargar_proyectos,
+    cargar_trayectoria,
+)
 from core.config import DIR_RAIZ
 from core.modelos import EstadoProyecto
 
@@ -46,13 +52,27 @@ tecnologias = ["Python"]
 """
 
 
+def _con_detalle(directorio: Path, slug: str = "demo") -> Path:
+    (directorio / "proyectos").mkdir(exist_ok=True)
+    (directorio / "proyectos" / f"{slug}.md").write_text("## Detalle", encoding="utf-8")
+    return directorio
+
+
 def test_proyecto_valido_con_campos_opcionales_ausentes(tmp_path):
-    (proyecto,) = cargar_proyectos(_escribir(tmp_path, "proyectos.toml", PROYECTO_VALIDO))
+    directorio = _con_detalle(_escribir(tmp_path, "proyectos.toml", PROYECTO_VALIDO))
+    (proyecto,) = cargar_proyectos(directorio)
 
     assert proyecto.estado is EstadoProyecto.PROTOTIPO
     assert proyecto.destacado is False
     assert proyecto.repo_url is None
+    assert proyecto.docs_url is None
     assert proyecto.demo_url is None
+    assert cargar_detalle_proyecto("demo", directorio) == "## Detalle"
+
+
+def test_falta_detalle_markdown(tmp_path):
+    with pytest.raises(ErrorContenido, match="falta el detalle proyectos/demo.md"):
+        cargar_proyectos(_escribir(tmp_path, "proyectos.toml", PROYECTO_VALIDO))
 
 
 def test_falta_campo_obligatorio(tmp_path):

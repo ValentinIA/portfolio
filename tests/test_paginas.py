@@ -8,7 +8,7 @@ import pytest
 from streamlit.testing.v1 import AppTest
 
 from core.config import DIR_RAIZ
-from servicios.contenido import obtener_perfil, obtener_proyecto_destacado
+from servicios.contenido import obtener_perfil, obtener_proyecto_destacado, obtener_proyectos
 
 PAGINAS = [
     "app_pages/inicio.py",
@@ -38,3 +38,32 @@ def test_inicio_muestra_perfil_y_destacado():
     subtitulos = [s.value for s in at.subheader]
     assert perfil.titular in subtitulos
     assert destacado is not None and destacado.titulo in subtitulos
+
+
+def _proyectos(slug: str | None = None) -> AppTest:
+    at = _app().run()
+    at.switch_page("app_pages/proyectos.py")
+    if slug is not None:
+        at.query_params["p"] = slug
+    return at.run()
+
+
+def test_proyectos_listado_muestra_todos():
+    at = _proyectos()
+    titulos = [s.value for s in at.subheader]
+    assert at.title[0].value == "Proyectos"
+    assert all(p.titulo in titulos for p in obtener_proyectos())
+
+
+def test_proyectos_detalle_por_slug():
+    at = _proyectos("buypilot")
+    assert not at.exception
+    assert at.title[0].value == "BuyPilot"
+    assert any("Trabajo realizado" in m.value for m in at.markdown)
+
+
+def test_proyectos_slug_inexistente_muestra_aviso_y_listado():
+    at = _proyectos("no-existe")
+    assert not at.exception
+    assert len(at.warning) == 1
+    assert at.title[0].value == "Proyectos"

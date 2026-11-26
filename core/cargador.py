@@ -170,4 +170,16 @@ def cargar_proyectos(directorio: Path = DIR_CONTENIDO) -> tuple[Proyecto, ...]:
     if repetidos:
         raise ErrorContenido(f"proyectos.toml: slugs repetidos: {', '.join(repetidos)}")
 
+    for slug in slugs:
+        if not (directorio / "proyectos" / f"{slug}.md").exists():
+            raise ErrorContenido(f"proyectos.toml: falta el detalle proyectos/{slug}.md")
+
     return tuple(proyectos)
+
+
+def cargar_detalle_proyecto(slug: str, directorio: Path = DIR_CONTENIDO) -> str:
+    """Devuelve el texto Markdown con el detalle de un proyecto."""
+    ruta = directorio / "proyectos" / f"{slug}.md"
+    if not ruta.exists():
+        raise ErrorContenido(f"No existe el detalle del proyecto: proyectos/{slug}.md")
+    return ruta.read_text(encoding="utf-8")
