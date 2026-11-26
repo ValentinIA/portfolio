@@ -69,7 +69,10 @@ def _rellenar_y_enviar(at: AppTest, **campos) -> AppTest:
     return at.button(key="contacto_enviar").click().run()
 
 
-def test_sin_secretos_no_muestra_formulario():
+def test_sin_secretos_no_muestra_formulario(monkeypatch):
+    # Se simula la ausencia de configuración para que el test no dependa de
+    # si en esta máquina existe un .streamlit/secrets.toml real.
+    monkeypatch.setattr(correo, "obtener_config", lambda: None)
     at = _contacto()
     assert not at.exception
     assert len(at.info) == 1
