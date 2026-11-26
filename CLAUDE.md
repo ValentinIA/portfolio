@@ -42,18 +42,19 @@ Objetivo secundario: aprender desarrollo agéntico con Claude Code.
 Separar **contenido**, **presentación** y **lógica**:
 
 ```
-app.py            # entrada: st.set_page_config + st.navigation (no carpeta pages/ automática)
-pages/            # vistas: inicio, proyectos (listado + detalle vía ?p=slug), sobre_mi, contacto
+app.py            # entrada: st.set_page_config + st.navigation (iconos Material + help en cada st.Page)
+app_pages/        # vistas (NO `pages/`: choca con el auto-discovery antiguo). Scripts directos, sin funciones envoltorio
+servicios/        # puente páginas ↔ core: caché (`st.cache_data`) del contenido; futuro cliente de la API
 components/       # UI reutilizable: reciben objetos y los pintan, no leen archivos
 core/             # modelos (dataclasses + Enum de estado) y carga de contenido. NO importa streamlit
 content/          # datos en TOML (tomllib) + Markdown por proyecto. Todo texto personal vive aquí
 assets/           # cv.pdf, styles.css, images/
-tests/            # pytest sobre core/
+tests/            # pytest: core/ (carga y validación) + páginas con AppTest
 .streamlit/config.toml  # tema
 ```
 
 Convenciones:
-- Ningún texto personal escrito a mano dentro de `pages/` o `components/`; todo sale de `content/`.
+- Ningún texto personal escrito a mano dentro de `app_pages/` o `components/`; todo sale de `content/`.
 - Lectura de contenido cacheada con `@st.cache_data`.
 - Estilo primero con el tema de `config.toml`; CSS personalizado mínimo, solo en `assets/styles.css`.
 - Evitar el aspecto de dashboard (navegación superior, sin sidebar si es posible).
@@ -68,9 +69,9 @@ Convenciones:
 ## Futura integración ML (no implementar todavía)
 
 - Streamlit será solo **cliente HTTP** de la API; nunca cargará el modelo.
-- Llamadas a la API encapsuladas en `services/credit_api.py`; URL en `st.secrets`.
+- Llamadas a la API encapsuladas en `servicios/api_credito.py`; URL en `st.secrets`.
 - Si la API no responde, mostrar un mensaje claro sin romper el resto de la web.
-- En la v1 solo existe el campo opcional `demo_url` en el modelo `Project`.
+- En la v1 solo existe el campo opcional `demo_url` en el modelo `Proyecto`.
 
 ## Comandos
 
@@ -99,5 +100,5 @@ Resueltas: repos de proyectos, LinkedIn y certificados enlazados (sacados del CV
 
 ## Fase actual
 
-Fase 3: modelo de contenido (core/ + content/*.toml + tests). Fases 0–2 completadas.
+Fase 4: páginas (Inicio hecha; siguen Proyectos, Sobre mí, Contacto). Fases 0–3 completadas.
 Hoja de ruta: 0 base → 1 despliegue temprano → 2 esqueleto de navegación → 3 modelo de contenido → 4 páginas → 5 diseño → 6 revisión y cierre.
