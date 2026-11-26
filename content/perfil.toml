@@ -1,0 +1,47 @@
+# Perfil profesional. Los valores "TODO" están pendientes de confirmar.
+
+nombre = "TODO"
+titular = "TODO"
+presentacion = "TODO"
+orientacion = [
+    "Desarrollo Python",
+    "Desarrollo backend",
+    "Data Science",
+    "Machine Learning aplicado",
+]
+email = "TODO"
+
+[[competencias]]
+nombre = "Lenguajes"
+tecnologias = ["Python", "SQL", "Java", "JavaScript"]
+
+[[competencias]]
+nombre = "Data Science y Machine Learning"
+tecnologias = [
+    "Pandas",
+    "NumPy",
+    "Scikit-learn",
+    "Machine Learning",
+    "Estadística",
+    "Análisis exploratorio de datos",
+]
+
+[[competencias]]
+nombre = "Backend y aplicaciones"
+tecnologias = ["FastAPI", "Flask", "Streamlit"]
+
+[[competencias]]
+nombre = "Bases de datos"
+tecnologias = ["MySQL", "SQLite", "MongoDB"]
+
+[[competencias]]
+nombre = "Herramientas"
+tecnologias = ["Git", "Docker", "Linux"]
+
+[[enlaces]]
+nombre = "GitHub"
+url = "https://github.com/ValentinIA"
+
+[[enlaces]]
+nombre = "LinkedIn"
+url = "TODO"

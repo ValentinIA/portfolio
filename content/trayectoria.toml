@@ -1,0 +1,45 @@
+# Experiencia, formación e idiomas. Los valores "TODO" están pendientes de confirmar.
+
+[[experiencia]]
+empresa = "Data Science Hub, S.L."
+puesto = "Prácticas de desarrollo y automatización"
+periodo = "2025"
+descripcion = "Desarrollo y automatización mediante APIs y Make."
+
+[[experiencia]]
+empresa = "Gestoría GIE"
+puesto = "Prácticas de soporte informático"
+periodo = "2023"
+descripcion = "Soporte informático y mantenimiento de equipos."
+
+[[formacion]]
+titulo = "Python Data Science Mastery"
+centro = "Data Science for Business"
+periodo = "2026"
+
+[[formacion]]
+titulo = "Python Essentials 1 y 2"
+centro = "Cisco Networking Academy"
+periodo = "2026"
+
+[[formacion]]
+titulo = "Grado Superior en Desarrollo de Aplicaciones Web"
+centro = "TODO"
+periodo = "2023-2025"
+
+[[formacion]]
+titulo = "Grado Medio en Sistemas Microinformáticos y Redes"
+centro = "TODO"
+periodo = "2021-2023"
+
+[[idiomas]]
+idioma = "Español"
+nivel = "Nativo"
+
+[[idiomas]]
+idioma = "Rumano"
+nivel = "Nativo"
+
+[[idiomas]]
+idioma = "Inglés"
+nivel = "Intermedio"

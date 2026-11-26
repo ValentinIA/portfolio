@@ -1,0 +1,13 @@
+# Configuración de herramientas. Las dependencias siguen en requirements*.txt.
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+# E/W: estilo PEP 8 · F: errores (pyflakes) · I: orden de imports · B: bugs comunes · UP: sintaxis moderna
+select = ["E", "W", "F", "I", "B", "UP"]

@@ -1,0 +1,25 @@
+# Proyectos del portfolio.
+# estado: "funcional" | "prototipo" | "prueba_de_concepto" | "TODO" (pendiente de confirmar)
+# repo_url y demo_url son opcionales: si no existen, se omite la línea.
+
+[[proyectos]]
+slug = "riesgo-credito"
+titulo = "Predicción de riesgo de crédito"
+resumen = "Desarrollo de un modelo de clasificación supervisada para identificar riesgo de impago."
+estado = "TODO"
+tecnologias = ["Python", "Pandas", "Scikit-learn", "Matplotlib", "Joblib"]
+destacado = true
+
+[[proyectos]]
+slug = "buypilot"
+titulo = "BuyPilot"
+resumen = "Plataforma web para búsqueda y comparación de precios."
+estado = "TODO"
+tecnologias = ["Python", "FastAPI", "MySQL", "Crawl4AI", "Docker", "Uvicorn"]
+
+[[proyectos]]
+slug = "contenido-redes"
+titulo = "Automatización de contenido para redes sociales"
+resumen = "Prueba de concepto para generar contenido a partir de archivos de vídeo."
+estado = "prueba_de_concepto"
+tecnologias = ["Python", "Streamlit", "OpenAI API", "Whisper", "SQLite"]

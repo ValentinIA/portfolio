@@ -29,6 +29,14 @@ Objetivo secundario: aprender desarrollo agéntico con Claude Code.
 - Sin frameworks frontend (React, Next.js…) salvo razón técnica justificada.
 - Futuro: API independiente con FastAPI para el modelo de riesgo de crédito.
 
+## Skill oficial de Streamlit
+
+- Usa la skill `developing-with-streamlit` antes de escribir o cambiar código de Streamlit.
+- Instalada en modo global (`~/.claude/skills/`) porque Windows no permite symlinks sin Modo de desarrollador.
+- Su script de descubrimiento no detecta el entorno Conda por sí solo: pásale siempre
+  `--python "C:/Users/valen/miniconda3/envs/portfolio/python.exe"`.
+- Si su documentación difiere de lo que recuerdas de Streamlit, manda la documentación.
+
 ## Arquitectura
 
 Separar **contenido**, **presentación** y **lógica**:
@@ -62,6 +70,7 @@ Convenciones:
 
 ```
 conda activate portfolio
+pip install -r requirements-dev.txt  # primera vez: app + pytest + ruff
 streamlit run app.py          # ejecutar en local
 pytest                        # tests
 ruff check . && ruff format . # lint y formato
@@ -83,5 +92,5 @@ Resueltas: repositorio público https://github.com/ValentinIA/portfolio · app p
 
 ## Fase actual
 
-Fase 2: esqueleto de navegación (4 páginas vacías con `st.navigation` superior). Fases 0 y 1 completadas.
+Fase 3: modelo de contenido (core/ + content/*.toml + tests). Fases 0–2 completadas.
 Hoja de ruta: 0 base → 1 despliegue temprano → 2 esqueleto de navegación → 3 modelo de contenido → 4 páginas → 5 diseño → 6 revisión y cierre.
