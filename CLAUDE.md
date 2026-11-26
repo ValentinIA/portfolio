@@ -59,6 +59,12 @@ Convenciones:
 - Evitar el aspecto de dashboard (navegación superior, sin sidebar si es posible).
 - `requirements.txt` con versiones fijadas como fuente de dependencias para el despliegue; `requirements-dev.txt` para pytest y ruff.
 
+## Datos personales
+
+- Fuente de verdad del contenido: el CV en `assets/` (ignorado por Git: contiene teléfono y email).
+- **No publicar teléfono ni email** en la web ni en el repositorio.
+- Contacto: próximamente mediante **formulario de contacto** (funcionalidad futura, por diseñar).
+
 ## Futura integración ML (no implementar todavía)
 
 - Streamlit será solo **cliente HTTP** de la API; nunca cargará el modelo.
@@ -78,17 +84,18 @@ ruff check . && ruff format . # lint y formato
 
 ## Proyectos del portfolio
 
-1. **Predicción de riesgo de crédito** (destacado): clasificación supervisada; Pandas, Scikit-learn, Matplotlib, Joblib. Estado: TODO.
-2. **BuyPilot**: comparador de precios; FastAPI, MySQL, Crawl4AI, Docker, Uvicorn. Estado: TODO.
-3. **Automatización de contenido para redes**: prueba de concepto; Streamlit, OpenAI API, Whisper, SQLite.
+Datos completos en `content/`. Resumen:
+1. **Predicción de riesgo de crédito** (destacado): Machine Learning. Estado: TODO.
+2. **Automatización de contenido para redes**: IA generativa, prueba de concepto, hecho en las prácticas de Data Science Hub.
+3. **BuyPilot**: desarrollo backend. Estado: TODO.
 
 ## Decisiones pendientes
 
-Estado de los proyectos 1 y 2 · repos públicos enlazables · capturas · email/LinkedIn/GitHub ·
-CV en PDF · idioma (solo ES o ES+EN) · foto · dataset y licencia del proyecto de crédito ·
-repo de la API (mismo o aparte) · hibernación de Community Cloud.
+Estado de los proyectos 1 y 3 · cómo ofrecer el CV en la web (el PDF no está en Git) ·
+diseño del formulario de contacto · capturas · idioma (solo ES o ES+EN) · foto ·
+dataset y licencia del proyecto de crédito · repo de la API (mismo o aparte) · hibernación de Community Cloud.
 
-Resueltas: repositorio público https://github.com/ValentinIA/portfolio · app publicada en https://valentin-portfolio.streamlit.app/ · Streamlit 1.67.0 admite `st.navigation(position="top")`.
+Resueltas: repos de proyectos, LinkedIn y certificados enlazados (sacados del CV) · repositorio público https://github.com/ValentinIA/portfolio · app publicada en https://valentin-portfolio.streamlit.app/ · Streamlit 1.67.0 admite `st.navigation(position="top")`.
 
 ## Fase actual
 

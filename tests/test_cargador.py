@@ -39,6 +39,7 @@ PROYECTO_VALIDO = """
 [[proyectos]]
 slug = "demo"
 titulo = "Demo"
+categoria = "Pruebas"
 resumen = "Resumen."
 estado = "prototipo"
 tecnologias = ["Python"]

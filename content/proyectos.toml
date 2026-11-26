@@ -1,25 +1,33 @@
-# Proyectos del portfolio.
+# Proyectos del portfolio. El orden del archivo es el orden en la web.
 # estado: "funcional" | "prototipo" | "prueba_de_concepto" | "TODO" (pendiente de confirmar)
-# repo_url y demo_url son opcionales: si no existen, se omite la línea.
+# repo_url, docs_url y demo_url son opcionales: si no existen, se omite la línea.
+# El detalle de cada proyecto está en content/proyectos/<slug>.md
 
 [[proyectos]]
 slug = "riesgo-credito"
 titulo = "Predicción de riesgo de crédito"
-resumen = "Desarrollo de un modelo de clasificación supervisada para identificar riesgo de impago."
+categoria = "Machine Learning"
+resumen = "Modelos de clasificación supervisada para identificar riesgo de impago."
 estado = "TODO"
-tecnologias = ["Python", "Pandas", "Scikit-learn", "Matplotlib", "Joblib"]
+tecnologias = ["Python", "Pandas", "Scikit-learn", "Matplotlib", "Joblib", "Jupyter"]
 destacado = true
-
-[[proyectos]]
-slug = "buypilot"
-titulo = "BuyPilot"
-resumen = "Plataforma web para búsqueda y comparación de precios."
-estado = "TODO"
-tecnologias = ["Python", "FastAPI", "MySQL", "Crawl4AI", "Docker", "Uvicorn"]
+repo_url = "https://github.com/ValentinIA/prediccion-riesgo-credito"
 
 [[proyectos]]
 slug = "contenido-redes"
 titulo = "Automatización de contenido para redes sociales"
-resumen = "Prueba de concepto para generar contenido a partir de archivos de vídeo."
+categoria = "IA generativa"
+resumen = "Generación de contenido a partir de vídeo: transcripción automática y modelos de lenguaje."
 estado = "prueba_de_concepto"
 tecnologias = ["Python", "Streamlit", "OpenAI API", "Whisper", "SQLite"]
+repo_url = "https://github.com/ValentinIA/generador-contenido"
+
+[[proyectos]]
+slug = "buypilot"
+titulo = "BuyPilot"
+categoria = "Desarrollo backend"
+resumen = "Plataforma web de búsqueda y comparación de precios con scraping automatizado."
+estado = "TODO"
+tecnologias = ["Python", "FastAPI", "MySQL", "Crawl4AI", "Docker", "Uvicorn"]
+repo_url = "https://github.com/ValentinIA/BuyPilot"
+docs_url = "https://drive.google.com/file/d/1EG5jIqrQIuUiGxtBX7gIe82wtyHMGLP-/view?usp=sharing"

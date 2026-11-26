@@ -1,36 +1,44 @@
-# Experiencia, formación e idiomas. Los valores "TODO" están pendientes de confirmar.
+# Experiencia, formación e idiomas. Fuente: CV.
 
 [[experiencia]]
 empresa = "Data Science Hub, S.L."
 puesto = "Prácticas de desarrollo y automatización"
-periodo = "2025"
-descripcion = "Desarrollo y automatización mediante APIs y Make."
+periodo = "Mar – Jun 2025"
+descripcion = """
+Automatización y migración de procesos de facturación mediante APIs y Make. \
+Desarrollo de un proyecto de automatización para la generación de contenido en redes sociales.
+"""
+credencial_url = "https://drive.google.com/file/d/10II_lJR9P_RUWwfJVY2L4iiDUONGXSm7/view?usp=sharing"
 
 [[experiencia]]
 empresa = "Gestoría GIE"
 puesto = "Prácticas de soporte informático"
-periodo = "2023"
-descripcion = "Soporte informático y mantenimiento de equipos."
+periodo = "Mar – Jun 2023"
+descripcion = "Mantenimiento de equipos, resolución de incidencias técnicas y soporte a usuarios (niveles 1–2)."
 
 [[formacion]]
 titulo = "Python Data Science Mastery"
 centro = "Data Science for Business"
 periodo = "2026"
+descripcion = "Análisis de datos, Pandas, EDA, estadística, clasificación y regresión con Scikit-learn, visualización y pipelines de ML."
+credencial_url = "https://drive.google.com/file/d/1VEtjRgEM0fN5uf8xULTzM6dttjTHUogx/view?usp=sharing"
 
 [[formacion]]
 titulo = "Python Essentials 1 y 2"
 centro = "Cisco Networking Academy"
 periodo = "2026"
+descripcion = "Fundamentos de Python (nivel iniciación e intermedio)."
+credencial_url = "https://drive.google.com/drive/folders/1B50Ecw6WtidpKJEwEITUkm18uyZEEvp9?usp=drive_link"
 
 [[formacion]]
-titulo = "Grado Superior en Desarrollo de Aplicaciones Web"
-centro = "TODO"
-periodo = "2023-2025"
+titulo = "Grado Superior en Desarrollo de Aplicaciones Web (DAW)"
+centro = "IES Villaverde"
+periodo = "2023 – 2025"
 
 [[formacion]]
-titulo = "Grado Medio en Sistemas Microinformáticos y Redes"
-centro = "TODO"
-periodo = "2021-2023"
+titulo = "Grado Medio en Sistemas Microinformáticos y Redes (SMR)"
+centro = "IES Calderón de la Barca"
+periodo = "2021 – 2023"
 
 [[idiomas]]
 idioma = "Español"

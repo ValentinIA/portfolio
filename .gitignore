@@ -8,6 +8,9 @@ __pycache__/
 .venv/
 venv/
 
+# CV y otros PDF con datos personales (repositorio público)
+assets/*.pdf
+
 # Secretos de Streamlit (nunca al repositorio)
 .streamlit/secrets.toml
 

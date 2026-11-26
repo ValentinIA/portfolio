@@ -1,42 +1,44 @@
 # Perfil profesional. Los valores "TODO" están pendientes de confirmar.
+# Fuente: CV (assets/, no versionado). Teléfono y email se omiten a propósito:
+# el contacto se hará mediante un formulario (funcionalidad futura).
 
-nombre = "TODO"
-titular = "TODO"
-presentacion = "TODO"
+nombre = "Valentin Tigovan"
+titular = "Desarrollador Python Junior · Data Science & IA"
+ubicacion = "Madrid, España"
+presentacion = """
+Desarrollador con formación en Desarrollo de Aplicaciones Web y formación complementaria \
+en Data Science. Aplico Python, SQL y Machine Learning en proyectos de análisis de datos, \
+modelización predictiva e integración de soluciones basadas en inteligencia artificial.
+
+Me interesa construir soluciones que conecten el procesamiento de datos, los modelos de IA \
+y el desarrollo backend.
+"""
 orientacion = [
     "Desarrollo Python",
     "Desarrollo backend",
     "Data Science",
     "Machine Learning aplicado",
 ]
-email = "TODO"
 
 [[competencias]]
 nombre = "Lenguajes"
-tecnologias = ["Python", "SQL", "Java", "JavaScript"]
+tecnologias = ["Python", "SQL"]
 
 [[competencias]]
 nombre = "Data Science y Machine Learning"
-tecnologias = [
-    "Pandas",
-    "NumPy",
-    "Scikit-learn",
-    "Machine Learning",
-    "Estadística",
-    "Análisis exploratorio de datos",
-]
+tecnologias = ["Pandas", "NumPy", "Scikit-learn", "XGBoost", "Estadística", "Análisis exploratorio (EDA)"]
 
 [[competencias]]
-nombre = "Backend y aplicaciones"
-tecnologias = ["FastAPI", "Flask", "Streamlit"]
+nombre = "Visualización"
+tecnologias = ["Matplotlib", "Seaborn"]
 
 [[competencias]]
-nombre = "Bases de datos"
-tecnologias = ["MySQL", "SQLite", "MongoDB"]
+nombre = "Desarrollo"
+tecnologias = ["FastAPI", "Flask", "Streamlit", "APIs"]
 
 [[competencias]]
-nombre = "Herramientas"
-tecnologias = ["Git", "Docker", "Linux"]
+nombre = "Datos e infraestructura"
+tecnologias = ["MySQL", "SQLite", "MongoDB", "Git", "Docker", "Linux", "Jupyter"]
 
 [[enlaces]]
 nombre = "GitHub"
@@ -44,4 +46,4 @@ url = "https://github.com/ValentinIA"
 
 [[enlaces]]
 nombre = "LinkedIn"
-url = "TODO"
+url = "https://www.linkedin.com/in/valentin-tigovan/"

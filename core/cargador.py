@@ -77,6 +77,7 @@ def cargar_perfil(directorio: Path = DIR_CONTENIDO) -> Perfil:
     return Perfil(
         nombre=_texto(datos, "nombre", ctx),
         titular=_texto(datos, "titular", ctx),
+        ubicacion=_texto(datos, "ubicacion", ctx),
         presentacion=_texto(datos, "presentacion", ctx),
         orientacion=_lista_textos(datos, "orientacion", ctx),
         competencias=tuple(
@@ -86,7 +87,6 @@ def cargar_perfil(directorio: Path = DIR_CONTENIDO) -> Perfil:
             )
             for grupo in _tablas(datos, "competencias", ctx)
         ),
-        email=_texto(datos, "email", ctx),
         enlaces=tuple(
             Enlace(
                 nombre=_texto(enlace, "nombre", f"{ctx} [[enlaces]]"),
@@ -107,6 +107,7 @@ def cargar_trayectoria(directorio: Path = DIR_CONTENIDO) -> Trayectoria:
                 puesto=_texto(e, "puesto", f"{ctx} [[experiencia]]"),
                 periodo=_texto(e, "periodo", f"{ctx} [[experiencia]]"),
                 descripcion=_texto(e, "descripcion", f"{ctx} [[experiencia]]"),
+                credencial_url=_texto_opcional(e, "credencial_url", f"{ctx} [[experiencia]]"),
             )
             for e in _tablas(datos, "experiencia", ctx)
         ),
@@ -115,6 +116,8 @@ def cargar_trayectoria(directorio: Path = DIR_CONTENIDO) -> Trayectoria:
                 titulo=_texto(f, "titulo", f"{ctx} [[formacion]]"),
                 centro=_texto(f, "centro", f"{ctx} [[formacion]]"),
                 periodo=_texto(f, "periodo", f"{ctx} [[formacion]]"),
+                descripcion=_texto_opcional(f, "descripcion", f"{ctx} [[formacion]]"),
+                credencial_url=_texto_opcional(f, "credencial_url", f"{ctx} [[formacion]]"),
             )
             for f in _tablas(datos, "formacion", ctx)
         ),
@@ -151,11 +154,13 @@ def cargar_proyectos(directorio: Path = DIR_CONTENIDO) -> tuple[Proyecto, ...]:
             Proyecto(
                 slug=_texto(p, "slug", ctx),
                 titulo=_texto(p, "titulo", ctx),
+                categoria=_texto(p, "categoria", ctx),
                 resumen=_texto(p, "resumen", ctx),
                 estado=_estado(p, ctx),
                 tecnologias=_lista_textos(p, "tecnologias", ctx),
                 destacado=destacado,
                 repo_url=_texto_opcional(p, "repo_url", ctx),
+                docs_url=_texto_opcional(p, "docs_url", ctx),
                 demo_url=_texto_opcional(p, "demo_url", ctx),
             )
         )

@@ -42,10 +42,10 @@ class Enlace:
 class Perfil:
     nombre: str
     titular: str
+    ubicacion: str
     presentacion: str
     orientacion: tuple[str, ...]
     competencias: tuple[GrupoCompetencias, ...]
-    email: str
     enlaces: tuple[Enlace, ...]
 
 
@@ -55,6 +55,7 @@ class Experiencia:
     puesto: str
     periodo: str
     descripcion: str
+    credencial_url: str | None = None
 
 
 @dataclass(frozen=True)
@@ -62,6 +63,8 @@ class Formacion:
     titulo: str
     centro: str
     periodo: str
+    descripcion: str | None = None
+    credencial_url: str | None = None
 
 
 @dataclass(frozen=True)
@@ -81,10 +84,12 @@ class Trayectoria:
 class Proyecto:
     slug: str
     titulo: str
+    categoria: str
     resumen: str
     estado: EstadoProyecto
     tecnologias: tuple[str, ...]
     destacado: bool = False
     repo_url: str | None = None
+    docs_url: str | None = None
     # Reservado para la futura demo interactiva (FastAPI + modelo de ML).
     demo_url: str | None = None
