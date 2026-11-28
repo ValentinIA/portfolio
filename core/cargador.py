@@ -10,7 +10,7 @@ import tomllib
 from pathlib import Path
 from typing import Any
 
-from core.config import DIR_CONTENIDO
+from core.config import DIR_CONTENIDO, DIR_STATIC
 from core.modelos import (
     Enlace,
     EstadoProyecto,
@@ -68,10 +68,45 @@ def _tablas(datos: dict[str, Any], campo: str, contexto: str) -> list[dict[str, 
     return valor
 
 
+def es_url(valor: str) -> bool:
+    return valor.startswith(("https://", "http://"))
+
+
+def _validar_recurso(valor: str, contexto: str, dir_static: Path) -> str:
+    """Una URL se acepta tal cual; una ruta local debe existir dentro de static/."""
+    if es_url(valor):
+        return valor
+    ruta = Path(valor)
+    # Nada de rutas con raíz ni "..": un recurso no puede salir de static/.
+    # `anchor` detecta "/", "\" y "C:\" en cualquier sistema operativo
+    # (en Windows, is_absolute() da False para "/etc/passwd").
+    if ruta.anchor or ".." in ruta.parts:
+        raise ErrorContenido(f"{contexto}: ruta no permitida '{valor}' (debe estar en static/)")
+    if not (dir_static / ruta).is_file():
+        raise ErrorContenido(f"{contexto}: no existe el archivo static/{valor}")
+    return ruta.as_posix()
+
+
+def _recurso_opcional(
+    datos: dict[str, Any], campo: str, contexto: str, dir_static: Path
+) -> str | None:
+    valor = _texto_opcional(datos, campo, contexto)
+    return None if valor is None else _validar_recurso(valor, contexto, dir_static)
+
+
+def _recursos(
+    datos: dict[str, Any], campo: str, contexto: str, dir_static: Path
+) -> tuple[str, ...]:
+    if campo not in datos:
+        return ()
+    valores = _lista_textos(datos, campo, contexto)
+    return tuple(_validar_recurso(v, contexto, dir_static) for v in valores)
+
+
 # --- Cargadores públicos ------------------------------------------------------
 
 
-def cargar_perfil(directorio: Path = DIR_CONTENIDO) -> Perfil:
+def cargar_perfil(directorio: Path = DIR_CONTENIDO, dir_static: Path = DIR_STATIC) -> Perfil:
     datos = _leer_toml(directorio / "perfil.toml")
     ctx = "perfil.toml"
     return Perfil(
@@ -95,10 +130,30 @@ def cargar_perfil(directorio: Path = DIR_CONTENIDO) -> Perfil:
             for enlace in _tablas(datos, "enlaces", ctx)
         ),
         aprendiendo=_texto_opcional(datos, "aprendiendo", ctx),
+        cv=_recurso_opcional(datos, "cv", ctx, dir_static),
     )
 
 
-def cargar_trayectoria(directorio: Path = DIR_CONTENIDO) -> Trayectoria:
+def _formaciones(
+    datos: dict[str, Any], seccion: str, ctx: str, dir_static: Path
+) -> tuple[Formacion, ...]:
+    """Lee [[formacion]] o [[cursos]]: ambas secciones tienen los mismos campos."""
+    c = f"{ctx} [[{seccion}]]"
+    return tuple(
+        Formacion(
+            titulo=_texto(f, "titulo", c),
+            centro=_texto(f, "centro", c),
+            periodo=_texto(f, "periodo", c),
+            descripcion=_texto_opcional(f, "descripcion", c),
+            certificados=_recursos(f, "certificados", c, dir_static),
+        )
+        for f in _tablas(datos, seccion, ctx)
+    )
+
+
+def cargar_trayectoria(
+    directorio: Path = DIR_CONTENIDO, dir_static: Path = DIR_STATIC
+) -> Trayectoria:
     datos = _leer_toml(directorio / "trayectoria.toml")
     ctx = "trayectoria.toml"
     return Trayectoria(
@@ -108,20 +163,15 @@ def cargar_trayectoria(directorio: Path = DIR_CONTENIDO) -> Trayectoria:
                 puesto=_texto(e, "puesto", f"{ctx} [[experiencia]]"),
                 periodo=_texto(e, "periodo", f"{ctx} [[experiencia]]"),
                 descripcion=_texto(e, "descripcion", f"{ctx} [[experiencia]]"),
-                credencial_url=_texto_opcional(e, "credencial_url", f"{ctx} [[experiencia]]"),
+                certificados=_recursos(e, "certificados", f"{ctx} [[experiencia]]", dir_static),
+                carta_recomendacion=_recurso_opcional(
+                    e, "carta_recomendacion", f"{ctx} [[experiencia]]", dir_static
+                ),
             )
             for e in _tablas(datos, "experiencia", ctx)
         ),
-        formacion=tuple(
-            Formacion(
-                titulo=_texto(f, "titulo", f"{ctx} [[formacion]]"),
-                centro=_texto(f, "centro", f"{ctx} [[formacion]]"),
-                periodo=_texto(f, "periodo", f"{ctx} [[formacion]]"),
-                descripcion=_texto_opcional(f, "descripcion", f"{ctx} [[formacion]]"),
-                credencial_url=_texto_opcional(f, "credencial_url", f"{ctx} [[formacion]]"),
-            )
-            for f in _tablas(datos, "formacion", ctx)
-        ),
+        formacion=_formaciones(datos, "formacion", ctx, dir_static),
+        cursos=_formaciones(datos, "cursos", ctx, dir_static),
         idiomas=tuple(
             Idioma(
                 idioma=_texto(i, "idioma", f"{ctx} [[idiomas]]"),
@@ -143,7 +193,9 @@ def _estado(datos: dict[str, Any], contexto: str) -> EstadoProyecto:
         ) from None
 
 
-def cargar_proyectos(directorio: Path = DIR_CONTENIDO) -> tuple[Proyecto, ...]:
+def cargar_proyectos(
+    directorio: Path = DIR_CONTENIDO, dir_static: Path = DIR_STATIC
+) -> tuple[Proyecto, ...]:
     datos = _leer_toml(directorio / "proyectos.toml")
     proyectos = []
     for indice, p in enumerate(_tablas(datos, "proyectos", "proyectos.toml"), start=1):
@@ -161,8 +213,8 @@ def cargar_proyectos(directorio: Path = DIR_CONTENIDO) -> tuple[Proyecto, ...]:
                 tecnologias=_lista_textos(p, "tecnologias", ctx),
                 destacado=destacado,
                 repo_url=_texto_opcional(p, "repo_url", ctx),
-                docs_url=_texto_opcional(p, "docs_url", ctx),
-                demo_url=_texto_opcional(p, "demo_url", ctx),
+                docs_url=_recurso_opcional(p, "docs_url", ctx, dir_static),
+                demo_url=_recurso_opcional(p, "demo_url", ctx, dir_static),
             )
         )
 

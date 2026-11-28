@@ -83,13 +83,17 @@ def test_sobre_mi_muestra_toda_la_trayectoria():
     assert not at.exception
     for e in trayectoria.experiencia:
         assert e.puesto in textos and e.empresa in textos
-    for f in trayectoria.formacion:
+    for f in (*trayectoria.formacion, *trayectoria.cursos):
         assert f.titulo in textos and f.centro in textos
     for i in trayectoria.idiomas:
         assert i.idioma in textos
 
     certificados = [
-        x for x in (*trayectoria.experiencia, *trayectoria.formacion) if x.credencial_url
+        c
+        for x in (*trayectoria.experiencia, *trayectoria.formacion, *trayectoria.cursos)
+        for c in x.certificados
     ]
-    enlaces = [e for e in at.get("page_link") if "certificado" in e.proto.label]
+    enlaces = [e.proto for e in at.get("link_button") if "certificado" in e.proto.label]
     assert len(enlaces) == len(certificados)
+    # Los archivos propios se enlazan a través del servidor estático de la app.
+    assert all(e.url.startswith(("app/static/", "http")) for e in enlaces)

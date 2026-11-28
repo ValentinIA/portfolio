@@ -20,18 +20,21 @@ slug = st.query_params.get("p")
 proyecto = buscar_proyecto(slug)
 
 if proyecto:
-    # --- Vista de detalle -----------------------------------------------------
+    # --- Vista de detalle: texto a la izquierda, ficha a la derecha ----------
     st.page_link(PAGINA_PROYECTOS, label="Todos los proyectos", icon=":material/arrow_back:")
     st.title(proyecto.titulo, anchor=False)
-    cabecera_insignias(proyecto)
-    st.markdown(proyecto.resumen)
-    with st.container(horizontal=True):
+
+    col_detalle, col_ficha = st.columns([2, 1], gap="large")
+
+    with col_detalle:
+        st.markdown(proyecto.resumen)
+        st.markdown(obtener_detalle_proyecto(proyecto.slug))
+
+    with col_ficha, st.container(border=True):
+        cabecera_insignias(proyecto)
+        st.subheader("Tecnologías", anchor=False)
+        st.markdown(insignias(proyecto.tecnologias))
         enlaces_externos(proyecto)
-
-    st.markdown(obtener_detalle_proyecto(proyecto.slug))
-
-    st.subheader("Tecnologías", anchor=False)
-    st.markdown(insignias(proyecto.tecnologias))
 
 else:
     # --- Vista de listado -----------------------------------------------------
@@ -41,6 +44,6 @@ else:
     st.title("Proyectos", anchor=False)
     st.caption("Cada proyecto indica su estado: funcional, prototipo o prueba de concepto.")
 
-    with st.grid("auto", min_column_width=300):
+    with st.grid("auto", min_column_width=320):
         for p in obtener_proyectos():
             tarjeta_proyecto(p)

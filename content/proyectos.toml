@@ -1,6 +1,7 @@
 # Proyectos del portfolio. El orden del archivo es el orden en la web.
 # estado: "funcional" | "prototipo" | "prueba_de_concepto" | "TODO" (pendiente de confirmar)
 # repo_url, docs_url y demo_url son opcionales: si no existen, se omite la línea.
+# docs_url puede ser una ruta relativa a static/ (archivo publicado) o una URL.
 # El detalle de cada proyecto está en content/proyectos/<slug>.md
 
 [[proyectos]]
@@ -30,4 +31,4 @@ resumen = "Plataforma web de búsqueda y comparación de precios con scraping au
 estado = "TODO"
 tecnologias = ["Python", "FastAPI", "MySQL", "Crawl4AI", "Docker", "Uvicorn"]
 repo_url = "https://github.com/ValentinIA/BuyPilot"
-docs_url = "https://drive.google.com/file/d/1EG5jIqrQIuUiGxtBX7gIe82wtyHMGLP-/view?usp=sharing"
+docs_url = "documentos/buypilot-memoria.pdf"

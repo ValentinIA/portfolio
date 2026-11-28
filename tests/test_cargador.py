@@ -116,3 +116,65 @@ def test_core_no_importa_streamlit():
             else:
                 continue
             assert not any(m.split(".")[0] == "streamlit" for m in modulos), archivo.name
+
+
+def test_cursos_separados_de_la_formacion_reglada():
+    trayectoria = cargar_trayectoria()
+    titulos_formacion = {f.titulo for f in trayectoria.formacion}
+    titulos_cursos = {c.titulo for c in trayectoria.cursos}
+
+    assert trayectoria.cursos
+    assert titulos_formacion.isdisjoint(titulos_cursos)
+    assert all(t.startswith("Grado") for t in titulos_formacion)
+
+
+# --- Recursos (certificados y documentos) --------------------------------------
+
+CURSO = """
+[[experiencia]]
+empresa = "E"
+puesto = "P"
+periodo = "2025"
+descripcion = "D"
+
+[[formacion]]
+titulo = "Grado"
+centro = "C"
+periodo = "2025"
+
+[[cursos]]
+titulo = "Curso"
+centro = "C"
+periodo = "2026"
+certificados = [{rutas}]
+
+[[idiomas]]
+idioma = "Español"
+nivel = "Nativo"
+"""
+
+
+def _trayectoria(tmp_path: Path, rutas: str):
+    contenido = tmp_path / "content"
+    static = tmp_path / "static"
+    (static / "certificados").mkdir(parents=True)
+    (static / "certificados" / "ok.pdf").write_bytes(b"%PDF")
+    contenido.mkdir()
+    (contenido / "trayectoria.toml").write_text(CURSO.format(rutas=rutas), encoding="utf-8")
+    return cargar_trayectoria(contenido, dir_static=static)
+
+
+def test_certificado_local_existente_y_url(tmp_path):
+    (curso,) = _trayectoria(tmp_path, '"certificados/ok.pdf", "https://ejemplo.com/c"').cursos
+    assert curso.certificados == ("certificados/ok.pdf", "https://ejemplo.com/c")
+
+
+def test_certificado_local_inexistente(tmp_path):
+    with pytest.raises(ErrorContenido, match="no existe el archivo static/certificados/no.pdf"):
+        _trayectoria(tmp_path, '"certificados/no.pdf"')
+
+
+@pytest.mark.parametrize("ruta", ["../assets/carta.pdf", "/etc/passwd"])
+def test_certificado_no_puede_salir_de_static(tmp_path, ruta):
+    with pytest.raises(ErrorContenido, match="ruta no permitida"):
+        _trayectoria(tmp_path, f'"{ruta}"')

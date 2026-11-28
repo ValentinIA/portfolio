@@ -7,7 +7,7 @@ en su propio archivo dentro de app_pages/.
 
 import streamlit as st
 
-st.set_page_config(page_title="Portfolio", layout="centered")
+st.set_page_config(page_title="Portfolio", page_icon=":material/code:", layout="wide")
 
 paginas = [
     st.Page(

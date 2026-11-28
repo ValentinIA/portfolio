@@ -48,7 +48,8 @@ servicios/        # puente páginas ↔ core: caché (`st.cache_data`) del conte
 components/       # UI reutilizable: reciben objetos y los pintan, no leen archivos
 core/             # modelos (dataclasses + Enum de estado) y carga de contenido. NO importa streamlit
 content/          # datos en TOML (tomllib) + Markdown por proyecto. Todo texto personal vive aquí
-assets/           # cv.pdf, styles.css, images/
+assets/           # privado, ignorado por Git (*.pdf)
+static/           # PÚBLICO: se sirve en /app/static/ (enableStaticServing). Certificados y documentos
 tests/            # pytest: core/ (carga y validación) + páginas con AppTest
 .streamlit/config.toml  # tema
 ```
@@ -62,11 +63,19 @@ Convenciones:
 
 ## Datos personales
 
-- Fuente de verdad del contenido: el CV en `assets/` (ignorado por Git: contiene teléfono y email).
-- **No publicar teléfono ni email** en la web ni en el repositorio.
+- Fuente de verdad del contenido: el CV, publicado en `static/documentos/cv-valentin-tigovan.pdf`.
+- Decisión del usuario: el CV (con su teléfono y email) y la carta de recomendación de DSH se publican.
+  Fuera de esos PDFs, **no escribir teléfono ni email** en el contenido de la web.
 - Contacto: **formulario** en la página Contacto → email por SMTP (`smtplib`) desde la cuenta del dueño, visitante en Reply-To.
   Credenciales solo en `st.secrets` (`[contacto]`, ver `.streamlit/secrets.toml.example`). Sin secretos, el formulario se oculta.
   Validación en servidor (`core/contacto.py`) además de la del navegador; límite de 3 envíos por sesión y 60 s entre intentos.
+
+## Archivos públicos (`static/`)
+
+- Todo lo que hay en `static/` se publica en la web **y** en el repo público: revisar cada archivo antes
+  (DNI, teléfonos, emails, datos de terceros). Nombres en minúsculas, sin espacios ni datos personales.
+- En el contenido se referencian como rutas relativas a `static/` (`certificados/x.pdf`); el cargador
+  valida que existan y que no salgan de `static/`. `components/enlaces.url_publica()` genera la URL.
 
 ## Futura integración ML (no implementar todavía)
 
@@ -90,11 +99,11 @@ ruff check . && ruff format . # lint y formato
 Datos completos en `content/`. Resumen:
 1. **Predicción de riesgo de crédito** (destacado): Machine Learning. Estado: TODO.
 2. **Automatización de contenido para redes**: IA generativa, prueba de concepto, hecho en las prácticas de Data Science Hub.
-3. **BuyPilot**: desarrollo backend. Estado: TODO.
+3. **BuyPilot**: TFG de DAW en equipo de 3; el usuario hizo el backend. Estado: TODO.
 
 ## Decisiones pendientes
 
-Estado de los proyectos 1 y 3 · cómo ofrecer el CV en la web (el PDF no está en Git) ·
+Estado de los proyectos 1 y 3 ·
 capturas · idioma (solo ES o ES+EN) · foto ·
 dataset y licencia del proyecto de crédito · repo de la API (mismo o aparte) · hibernación de Community Cloud.
 
@@ -102,5 +111,7 @@ Resueltas: repos de proyectos, LinkedIn y certificados enlazados (sacados del CV
 
 ## Fase actual
 
-Fase 5: diseño (tema en config.toml). Fases 0–4 completadas: las 4 páginas muestran contenido real.
+Fase 5: diseño, en revisión visual con el usuario. Fases 0–4 completadas.
+Diseño decidido: tema **oscuro fijo** (azul + slate, Inter) en `.streamlit/config.toml`; `layout="wide"` con
+columnas (principal a la izquierda, secundario a la derecha); sin divisores; contraste WCAG AA (≥ 4.5:1).
 Hoja de ruta: 0 base → 1 despliegue temprano → 2 esqueleto de navegación → 3 modelo de contenido → 4 páginas → 5 diseño → 6 revisión y cierre.

@@ -49,6 +49,7 @@ class Perfil:
     enlaces: tuple[Enlace, ...]
     # Lo que se está aprendiendo ahora (se muestra como aprendizaje, no como especialidad).
     aprendiendo: str | None = None
+    cv: str | None = None  # Ruta relativa a static/ o URL
 
 
 @dataclass(frozen=True)
@@ -57,16 +58,20 @@ class Experiencia:
     puesto: str
     periodo: str
     descripcion: str
-    credencial_url: str | None = None
+    # Rutas relativas a static/ (p. ej. "certificados/x.pdf") o URLs completas.
+    certificados: tuple[str, ...] = ()
+    carta_recomendacion: str | None = None  # Ruta relativa a static/ o URL
 
 
 @dataclass(frozen=True)
 class Formacion:
+    """Formación reglada o curso: comparten la misma forma."""
+
     titulo: str
     centro: str
     periodo: str
     descripcion: str | None = None
-    credencial_url: str | None = None
+    certificados: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -78,7 +83,8 @@ class Idioma:
 @dataclass(frozen=True)
 class Trayectoria:
     experiencia: tuple[Experiencia, ...]
-    formacion: tuple[Formacion, ...]
+    formacion: tuple[Formacion, ...]  # Formación reglada (grados)
+    cursos: tuple[Formacion, ...]  # Cursos y certificaciones
     idiomas: tuple[Idioma, ...]
 
 
@@ -92,6 +98,6 @@ class Proyecto:
     tecnologias: tuple[str, ...]
     destacado: bool = False
     repo_url: str | None = None
-    docs_url: str | None = None
+    docs_url: str | None = None  # Ruta relativa a static/ o URL
     # Reservado para la futura demo interactiva (FastAPI + modelo de ML).
     demo_url: str | None = None

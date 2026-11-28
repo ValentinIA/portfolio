@@ -1,0 +1,37 @@
+# Tema del portfolio: oscuro fijo, azul como color de marca y grises "slate".
+# Basado en la plantilla "shadcn-dual" de la skill oficial de Streamlit.
+#
+# Solo [theme] (sin [theme.light] / [theme.dark]) bloquea la apariencia:
+# todos los visitantes ven el modo oscuro y no aparece el selector.
+
+[theme]
+base = "dark"
+font = "'Inter':https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+codeFont = "'JetBrains Mono':https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
+codeFontSize = "0.875rem"
+headingFontSizes = ["40px", "28px", "22px", "18px", "16px", "14px"]
+headingFontWeights = [700, 600, 600, 600, 600, 600]
+baseRadius = "8px"
+buttonRadius = "8px"
+showWidgetBorder = true
+linkUnderline = false
+# Menos espacio vacío bajo la barra de navegación (Streamlit suma la altura de la cabecera).
+paddingTop = "1.5rem"
+
+# Contraste WCAG AA verificado (≥ 4.5:1) para texto, botones, enlaces y captions.
+primaryColor = "#2563EB"             # blue-600: texto blanco de botones legible
+linkColor = "#60A5FA"                # blue-400
+backgroundColor = "#0F172A"          # slate-900
+secondaryBackgroundColor = "#1E293B" # slate-800: algo más claro que el fondo
+textColor = "#F1F5F9"                # slate-100
+borderColor = "#334155"              # slate-700
+codeBackgroundColor = "#1E293B"
+codeTextColor = "#E2E8F0"
+grayColor = "#94A3B8"                # slate-400
+blueColor = "#60A5FA"
+greenColor = "#4ADE80"
+violetColor = "#A78BFA"
+
+[server]
+# Publica la carpeta static/ en /app/static/ (certificados y documentos en PDF).
+enableStaticServing = true

@@ -14,6 +14,7 @@ Me interesa construir soluciones que conecten el procesamiento de datos, los mod
 y el desarrollo backend.
 """
 aprendiendo = "Desarrollo agéntico con Claude Code: este portfolio es mi proyecto de práctica."
+cv = "documentos/cv-valentin-tigovan.pdf"
 orientacion = [
     "Desarrollo Python",
     "Desarrollo backend",

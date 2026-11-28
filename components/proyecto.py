@@ -2,6 +2,7 @@
 
 import streamlit as st
 
+from components.enlaces import enlace_recurso
 from components.insignias import insignia_estado, insignias
 from core.modelos import Proyecto
 
@@ -19,9 +20,9 @@ def enlaces_externos(proyecto: Proyecto) -> None:
         ("Documentación", proyecto.docs_url, ":material/description:"),
         ("Demo", proyecto.demo_url, ":material/play_circle:"),
     ]
-    for etiqueta, url, icono in enlaces:
-        if url:
-            st.page_link(url, label=etiqueta, icon=icono)
+    for etiqueta, recurso, icono in enlaces:
+        if recurso:
+            enlace_recurso(etiqueta, recurso, icono)
 
 
 def tarjeta_proyecto(proyecto: Proyecto) -> None:

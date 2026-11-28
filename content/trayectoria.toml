@@ -1,4 +1,5 @@
-# Experiencia, formación e idiomas. Fuente: CV.
+# Experiencia, formación reglada, cursos e idiomas. Fuente: CV.
+# certificados: rutas relativas a static/ (archivos publicados) o URLs completas.
 
 [[experiencia]]
 empresa = "Data Science Hub, S.L."
@@ -8,27 +9,13 @@ descripcion = """
 Automatización y migración de procesos de facturación mediante APIs y Make. \
 Desarrollo de un proyecto de automatización para la generación de contenido en redes sociales.
 """
-credencial_url = "https://drive.google.com/file/d/10II_lJR9P_RUWwfJVY2L4iiDUONGXSm7/view?usp=sharing"
+carta_recomendacion = "documentos/carta-recomendacion-dsh.pdf"
 
 [[experiencia]]
 empresa = "Gestoría GIE"
 puesto = "Prácticas de soporte informático"
 periodo = "Mar – Jun 2023"
 descripcion = "Mantenimiento de equipos, resolución de incidencias técnicas y soporte a usuarios (niveles 1–2)."
-
-[[formacion]]
-titulo = "Python Data Science Mastery"
-centro = "Data Science for Business"
-periodo = "2026"
-descripcion = "Análisis de datos, Pandas, EDA, estadística, clasificación y regresión con Scikit-learn, visualización y pipelines de ML."
-credencial_url = "https://drive.google.com/file/d/1VEtjRgEM0fN5uf8xULTzM6dttjTHUogx/view?usp=sharing"
-
-[[formacion]]
-titulo = "Python Essentials 1 y 2"
-centro = "Cisco Networking Academy"
-periodo = "2026"
-descripcion = "Fundamentos de Python (nivel iniciación e intermedio)."
-credencial_url = "https://drive.google.com/drive/folders/1B50Ecw6WtidpKJEwEITUkm18uyZEEvp9?usp=drive_link"
 
 [[formacion]]
 titulo = "Grado Superior en Desarrollo de Aplicaciones Web (DAW)"
@@ -40,13 +27,27 @@ titulo = "Grado Medio en Sistemas Microinformáticos y Redes (SMR)"
 centro = "IES Calderón de la Barca"
 periodo = "2021 – 2023"
 
+[[cursos]]
+titulo = "Python Data Science Mastery"
+centro = "Data Science for Business"
+periodo = "2026"
+descripcion = "Análisis de datos, Pandas, EDA, estadística, clasificación y regresión con Scikit-learn, visualización y pipelines de ML."
+certificados = ["certificados/data-science-mastery.pdf"]
+
+[[cursos]]
+titulo = "Python Essentials 1 y 2"
+centro = "Cisco Networking Academy"
+periodo = "2026"
+descripcion = "Fundamentos de Python (nivel iniciación e intermedio)."
+certificados = ["certificados/python-essentials-1.pdf", "certificados/python-essentials-2.pdf"]
+
 [[idiomas]]
 idioma = "Español"
 nivel = "Nativo"
 
 [[idiomas]]
 idioma = "Rumano"
-nivel = "Nativo"
+nivel = "Intermedio"
 
 [[idiomas]]
 idioma = "Inglés"
